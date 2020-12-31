@@ -23,7 +23,6 @@ class CreateKaryawanTable extends Migration
             $table->string('agama');
             $table->string('notelp');
             $table->string('alamat');
-            $table->string('pendidikan');
             $table->timestamps();
         });
     }

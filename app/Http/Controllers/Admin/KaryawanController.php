@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Karyawan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class KaryawanController extends Controller
 {
@@ -15,7 +16,11 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $karyawan = Karyawan::all();
+        if (Gate::denies('rootadmin')){
+            return redirect(route('home'));
+        }
+
+        $karyawan = Karyawan::orderBy('id', 'asc')->paginate(5);
         return view('admin.karyawan.index')->with('karyawan', $karyawan);
     }
 
@@ -26,6 +31,10 @@ class KaryawanController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('rootadmin')){
+            return redirect(route('home'));
+        }
+
         return view('admin.karyawan.tambah');
     }
 
@@ -37,6 +46,10 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('rootadmin')){
+            return redirect(route('home'));
+        }
+
         $karyawan = Karyawan::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -45,8 +58,7 @@ class KaryawanController extends Controller
             'jeniskelamin' => $request['jk'],
             'agama' => $request['agama'],
             'notelp' => $request['notelp'],
-            'alamat' => $request['alamat'],
-            'pendidikan' => $request['pendidikan']
+            'alamat' => $request['alamat']
         ]);
 
         return redirect(route('root.karyawan.index'));
@@ -71,6 +83,10 @@ class KaryawanController extends Controller
      */
     public function edit(Karyawan $karyawan)
     {
+        if (Gate::denies('rootadmin')){
+            return redirect(route('home'));
+        }
+
         return view('admin.karyawan.edit')->with('karyawan', $karyawan);
     }
 
@@ -83,6 +99,10 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, Karyawan $karyawan)
     {
+        if (Gate::denies('rootadmin')){
+            return redirect(route('home'));
+        }
+
         $karyawan->name = $request->name;
         $karyawan->email = $request->email;
         $karyawan->tempatlahir = $request->tempatlahir;
@@ -91,7 +111,6 @@ class KaryawanController extends Controller
         $karyawan->agama = $request->agama;
         $karyawan->notelp = $request->notelp;
         $karyawan->alamat = $request->alamat;
-        $karyawan->pendidikan = $request->pendidikan;
         $karyawan->save();
 
         return redirect(route('root.karyawan.index'));
@@ -105,6 +124,10 @@ class KaryawanController extends Controller
      */
     public function destroy(Karyawan $karyawan)
     {
+        if (Gate::denies('rootadmin')){
+            return redirect(route('home'));
+        }
+
         $karyawan->delete();
 
         return redirect(route('root.karyawan.index'));

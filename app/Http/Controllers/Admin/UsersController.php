@@ -27,7 +27,7 @@ class UsersController extends Controller
             return redirect(route('home'));
         }
 
-        $users = User::all();
+        $users = User::orderBy('id', 'asc')->paginate(5);
         return view('root.users.index')->with('users', $users);
     }
 
@@ -38,7 +38,15 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('root.users.tambah');
+        if (Gate::denies('root')){
+            return redirect(route('home'));
+        }
+
+        $idusr = User::all('id_karyawan');
+        $karyawan = Karyawan::all();
+
+        $diff = $karyawan->diff(Karyawan::whereIn('id', $idusr)->get());
+        return view('root.users.tambah')->with('karyawan', $diff);
     }
 
     /**
@@ -49,9 +57,14 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('root')){
+            return redirect(route('home'));
+        }
+
         $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
+            'id_karyawan' => $request['karyawan'],
             'password' => Hash::make($request['password']),
         ]);
 
@@ -81,13 +94,20 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        if (Gate::denies('root')){
+            return redirect(route('home'));
+        }
+
+        $idusr = User::all('id_karyawan');
         $roles = Role::all();
-        $karyawans = Karyawan::all();
+        $karya = Karyawan::all();
+
+        $diff = $karya->diff(Karyawan::whereIn('id', $idusr)->get());
 
         return view('root.users.edit')->with([
             'user' => $user,
             'roles' => $roles,
-            'karyawans' => $karyawans
+            'karya' => $diff
         ]);
     }
 
@@ -100,8 +120,13 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if (Gate::denies('root')){
+            return redirect(route('home'));
+        }
+
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->id_karyawan = $request->karyawan;
         $user->save();
 
         $user->roles()->sync($request->roles);
@@ -117,6 +142,10 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
+        if (Gate::denies('root')){
+            return redirect(route('home'));
+        }
+
         $user->roles()->detach();
         $user->delete();
 

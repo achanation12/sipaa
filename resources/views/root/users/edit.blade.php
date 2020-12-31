@@ -56,9 +56,14 @@
 
                         <div class="col-md-6">
                             <select name="karyawan" id="karyawan" class="form-control @error('karyawan') is-invalid @enderror">
-                                <option value="{{ $user->karyawans->id }}">{{ $user->karyawans->name }}</option>
-                                @foreach ($karyawans as $kar)
-                                <option value="{{ $kar->id }}">{{ $kar->name }}</option>
+                                <option value="{{ $user->id_karyawan }}">
+                                    @if ($user->id_karyawan)
+                                        {{App\Karyawan::where('id', $user->id_karyawan)->first()->name}}
+                                    @endif
+                                </option>
+
+                                @foreach ($karya as $kar)
+                                    <option value="{{ $kar->id }}">{{ $kar->name }}</option>
                                 @endforeach
                             </select>
 

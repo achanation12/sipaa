@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
+use App\Karyawan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
@@ -81,10 +82,12 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
+        $karyawans = Karyawan::all();
 
         return view('root.users.edit')->with([
             'user' => $user,
-            'roles' => $roles
+            'roles' => $roles,
+            'karyawans' => $karyawans
         ]);
     }
 

@@ -60,4 +60,8 @@ class User extends Authenticatable
     }
 
     // END ROLE RELATIONSHIP
+
+    public function karyawans(){
+        return $this->hasOne('App\Karyawan', 'id');
+    }
 }

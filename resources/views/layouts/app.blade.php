@@ -43,6 +43,9 @@
                             <a class="nav-link" href="{{ route('root.users.index') }}">Users</a>
                         </li>
                         @endcan
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('root.karyawan.index') }}">Karyawan</a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

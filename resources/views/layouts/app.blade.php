@@ -47,6 +47,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('root.karyawan.index') }}">Karyawan</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('root.gaji.index') }}">Gaji</a>
+                        </li>
                         @endcan
                         <!-- Authentication Links -->
                         @guest
@@ -85,6 +88,8 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="text-center">2020 &copy; felis</footer>
     </div>
 </body>
 </html>

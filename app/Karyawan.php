@@ -8,8 +8,6 @@ class Karyawan extends Model
 {
     protected $table = 'karyawan';
 
-    protected $primaryKey = 'id';
-
     protected $fillable = [
         'name', 'tempatlahir', 'tanggallahir', 'jeniskelamin', 'agama', 'notelp', 'alamat', 'email',
     ];
@@ -17,5 +15,9 @@ class Karyawan extends Model
     public function users()
     {
         return $this->hasOne('App\User');
+    }
+
+    public function gajis() {
+        return $this->hasOne('App\Gaji', 'id');
     }
 }

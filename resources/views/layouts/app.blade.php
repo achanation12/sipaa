@@ -51,6 +51,11 @@
                             <a class="nav-link" href="{{ route('root.gaji.index') }}">Gaji</a>
                         </li>
                         @endcan
+                        @can('rootadminkaryawan')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('root.todolist.index') }}">Todolist</a>
+                        </li>
+                        @endcan
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

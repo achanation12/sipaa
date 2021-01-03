@@ -8,7 +8,6 @@ class Gaji extends Model
 {
     protected $table = 'gaji';
 
-
     protected $fillable = [
         'gajibln', 'gajibonus', 'gajilembur', 'gajitotal', 'id_karyawan',
     ];

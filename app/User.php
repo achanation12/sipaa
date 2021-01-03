@@ -64,4 +64,9 @@ class User extends Authenticatable
     public function karyawans(){
         return $this->hasOne('App\Karyawan', 'id');
     }
+
+    public function todolists()
+    {
+        return $this->hasOne('App\Todolist', 'id');
+    }
 }

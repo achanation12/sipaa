@@ -5,7 +5,24 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Edit Gaji</div>
+                <div class="card-header">Edit Gaji
+                    <button type="submit" id="hitung" name="hitung" onclick="hitung()" class="btn btn-success btn-sm float-right">
+                        Hitung
+                    </button>
+
+                    <script>
+                        function hitung(){
+                            var lembur = document.getElementById("gajilembur").value;
+                            var bonus = document.getElementById("gajibonus").value;
+                            var bulan = document.getElementById("gajibln").value;
+
+                            jumlah = parseFloat(lembur)+parseFloat(bonus)+parseFloat(bulan);
+
+                            $("#gajitotal").val(jumlah);
+                        }
+                    </script>
+
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('root.gaji.update', $gaji) }}">
@@ -61,12 +78,10 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="id_karyawan" class="col-md-2 col-form-label text-md-right">Karyawan</label>
-
-                            <div class="col-md-10">
-                                <select id="id_karyawan" class="form-control @error('id_karyawan') is-invalid @enderror" name="id_karyawan"  required>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="id_karyawan" class="col-md-0 col-form-label text-md-right">User</label>
+                                    <select id="id_karyawan" class="form-control @error('id_karyawan') is-invalid @enderror" name="id_karyawan"  required>
                                     <option value="{{ $gaji->id_karyawan }}" selected >{{ $gaji->karyawans->name }}</option>
                                     @foreach ($diff as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -78,21 +93,12 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                        </div>
+                                <br>
 
-                        <div class="form-group row">
-                            <div class="col-md-0">
                                 <button type="submit" class="btn btn-primary">
-                                    Buat
+                                    Ubah
                                 </button>
                             </div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-warning">
-                                    Hitung
-                                </button>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>

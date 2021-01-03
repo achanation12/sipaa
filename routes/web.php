@@ -26,4 +26,5 @@ Route::namespace('Admin')->prefix('root')->name('root.')->group(function(){
     Route::resource('users', 'UsersController');
     Route::resource('karyawan', 'KaryawanController');
     Route::resource('gaji', 'GajiController');
+    Route::resource('todolist', 'TodolistsController');
 });

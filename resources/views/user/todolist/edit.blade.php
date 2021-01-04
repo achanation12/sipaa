@@ -123,7 +123,7 @@
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary">
-                            Buat
+                            Ubah
                         </button>
                     </form>
                 </div>

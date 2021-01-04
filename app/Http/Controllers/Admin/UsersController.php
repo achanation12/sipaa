@@ -133,10 +133,10 @@ class UsersController extends Controller
 
         $user->roles()->sync($request->roles);
 
-        $karyawan = Karyawan::whereId($id)->update([
-            'email' => $request['email'],
-            'name' => $request['name'],
-        ]);
+        // $karyawan = Karyawan::whereId($id)->update([
+        //     'email' => $request['email'],
+        //     'name' => $request['name'],
+        // ]);
 
         return redirect(route('root.users.index'))->with('message', 'Ubah Data User Berhasil.');
     }

@@ -121,7 +121,7 @@
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary">
-                            Buat
+                            Tambah
                         </button>
                     </form>
                 </div>

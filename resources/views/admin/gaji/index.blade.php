@@ -46,7 +46,7 @@
                                     </button>
                             </form>
                             </td>
-                            <td><a class="btn btn-secondary btn-sm" href="{{ Route('root.gaji.show', $item->id) }}">Detail</a></td>
+                            <td><a class="btn btn-secondary btn-sm" href="{{ Route('root.karyawan.show', $item->id_karyawan) }}">Detail</a></td>
                         </tr>
                         @endforeach
                     </tbody>

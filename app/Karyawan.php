@@ -18,6 +18,6 @@ class Karyawan extends Model
     }
 
     public function gajis() {
-        return $this->hasOne('App\Gaji', 'id');
+        return $this->hasOne('App\Gaji', 'id_karyawan');
     }
 }

@@ -66,8 +66,6 @@
 
                             <div class="col-md-6">
                                 <select name="karyawan" id="karyawan" class="form-control @error('karyawan') is-invalid @enderror">
-
-
                                     <option value="">Pilih Karyawan</option>
                                     @foreach ($karyawan as $kar)
                                         <option value="{{ $kar->id }}">{{ $kar->name }}</option>

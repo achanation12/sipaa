@@ -72,7 +72,7 @@ class UsersController extends Controller
 
         $user->roles()->attach($role);
 
-        return redirect(route('root.users.index'));
+        return redirect(route('root.users.index'))->with('message', 'Tambah Data User Berhasil.');
     }
 
     /**
@@ -124,6 +124,8 @@ class UsersController extends Controller
             return redirect(route('home'));
         }
 
+        $id = $request->karyawan;
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->id_karyawan = $request->karyawan;
@@ -131,7 +133,12 @@ class UsersController extends Controller
 
         $user->roles()->sync($request->roles);
 
-        return redirect(route('root.users.index'));
+        $karyawan = Karyawan::whereId($id)->update([
+            'email' => $request['email'],
+            'name' => $request['name'],
+        ]);
+
+        return redirect(route('root.users.index'))->with('message', 'Ubah Data User Berhasil.');
     }
 
     /**
@@ -149,6 +156,6 @@ class UsersController extends Controller
         $user->roles()->detach();
         $user->delete();
 
-        return redirect(route('root.users.index'));
+        return redirect(route('root.users.index'))->with('message', 'Hapus Data User Berhasil.');
     }
 }

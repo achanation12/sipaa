@@ -50,7 +50,7 @@ class GajiController extends Controller
             'id_karyawan' => $request['id_karyawan'],
         ]);
 
-        return redirect(route('root.gaji.index'));
+        return redirect(route('root.gaji.index'))->with('message', 'Tambah Data Gaji Berhasil.');
     }
 
     /**
@@ -98,7 +98,7 @@ class GajiController extends Controller
         $gaji->id_karyawan = $request->id_karyawan;
         $gaji->save();
 
-        return redirect(route('root.gaji.index'));
+        return redirect(route('root.gaji.index'))->with('message', 'Ubah Data Gaji Berhasil.');
     }
 
     /**
@@ -111,6 +111,6 @@ class GajiController extends Controller
     {
         $gaji->delete();
 
-        return redirect(route('root.gaji.index'));
+        return redirect(route('root.gaji.index'))->with('message', 'Hapus Data Gaji Berhasil.');
     }
 }

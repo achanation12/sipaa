@@ -49,7 +49,7 @@ class TodolistsController extends Controller
             'isi' => $request['isi'],
         ]);
 
-        return redirect(route('root.todolist.index'));
+        return redirect(route('root.todolist.index'))->with('message', 'Tambah Data Todolist Berhasil.');
     }
 
     /**
@@ -95,7 +95,7 @@ class TodolistsController extends Controller
         $todolist->isi = $request->isi;
         $todolist->save();
 
-        return redirect(route('root.todolist.index'));
+        return redirect(route('root.todolist.index'))->with('message', 'Ubah Data Todolist Berhasil.');
     }
 
     /**
@@ -108,6 +108,6 @@ class TodolistsController extends Controller
     {
         $todolist->delete();
 
-        return redirect(route('root.todolist.index'));
+        return redirect(route('root.todolist.index'))->with('message', 'Haspus Data Todolist Berhasil.');
     }
 }

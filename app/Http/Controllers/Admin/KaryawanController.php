@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Karyawan;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -61,7 +62,7 @@ class KaryawanController extends Controller
             'alamat' => $request['alamat']
         ]);
 
-        return redirect(route('root.karyawan.index'));
+        return redirect(route('root.karyawan.index'))->with('message', 'Tambah Data Karyawan Berhasil.');
     }
 
     /**
@@ -72,7 +73,7 @@ class KaryawanController extends Controller
      */
     public function show(Karyawan $karyawan)
     {
-        //
+        return view('admin.karyawan.detail')->with('karyawan', $karyawan);
     }
 
     /**
@@ -103,6 +104,8 @@ class KaryawanController extends Controller
             return redirect(route('home'));
         }
 
+        $id = $karyawan->id;
+
         $karyawan->name = $request->name;
         $karyawan->email = $request->email;
         $karyawan->tempatlahir = $request->tempatlahir;
@@ -113,7 +116,12 @@ class KaryawanController extends Controller
         $karyawan->alamat = $request->alamat;
         $karyawan->save();
 
-        return redirect(route('root.karyawan.index'));
+        $user = User::where('id_karyawan', $id)->update([
+            'name' => $request['name'],
+            'email' => $request['email'],
+        ]);
+
+        return redirect(route('root.karyawan.index'))->with('message', 'Ubah Data Karyawan Berhasil.');
     }
 
     /**
@@ -130,6 +138,6 @@ class KaryawanController extends Controller
 
         $karyawan->delete();
 
-        return redirect(route('root.karyawan.index'));
+        return redirect(route('root.karyawan.index'))->with('message', 'Hapus Data Karyawan Berhasil.');
     }
 }
